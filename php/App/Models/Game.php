@@ -105,14 +105,14 @@ class Game
         $inthemiddle = $possibles[$middle];
         $this->play($inthemiddle);
     }
-    public function save()
+    public function save($game)
     {
-        $_SESSION['board'] = $this->board;
+        $_SESSION['game'] = $game;
     }
     public static function restore()
     {
-        if (isset($_SESSION['board'])) {
-            $this->board = $_SESSION['board'];
+        if (isset($_SESSION['game'])) {
+            return $_SESSION['game'];
         }
     }
 }
