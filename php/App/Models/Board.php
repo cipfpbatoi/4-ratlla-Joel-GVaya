@@ -14,32 +14,54 @@ class Board
     ];
 
     private array $slots; // graella
-
+    /*
+    * Constructor de la classe Board
+    */
     public function __construct()
     {
         $this->initializeBoard();
     }
 
+    //Getter per a obtindre els slots
+    public function getSlots(): array
+    {
+        return $this->slots;
+    }
+    /*
+    * Metode per inicialitzar el tauler
+    */
     private function initializeBoard(): void
     {
         $this->slots = [];
-        for ($i = 0; $i < self::FILES; $i++) {
+        for ($i = 1; $i <= self::FILES; $i++) {
             $fila = array_fill(0, self::COLUMNS, 0);
             $this->slots[] = $fila;
         }
     }
 
-    public function setMovementOnBoard(int $column, int $player): bool
+    /*
+    * Metode per fer un moviment en el tauler
+    * Reb en quina columna es fa el moviment y el jugador que l'ha fet
+    * recorre l'array des de l'ultima fila cap a munt per saber si pot fer el moviment, si pot el fa y si no retorna null
+    */
+    public function setMovementOnBoard(int $column, int $player): ?array
     {
-        for ($i = self::FILES - 1; $i >= 0; $i--) {
-            if ($this->slots[$i][$column] == 0) {
-                $this->slots[$i][$column] = $player;
-                return true;
+        $columna = $column -1;
+        for ($i = self::FILES; $i >= 0; $i--) {
+            // Comproba si la posicio esta buida
+            if (isset($this->slots[$i][$columna]) && $this->slots[$i][$columna] == 0) {
+                $this->slots[$i][$columna] = $player;
+                return [$i, $columna];
             }
         }
-        return false;
+        // Si la columna esta plena
+        return [1, 1];
     }
 
+    /*
+    * Metode per comprobar si hi ha un guañador
+    * reb les coordenades de l'ultim moviment fet y des d'ahi comprova si hi han 4 juntes
+    */
     public function checkWin(array $coord): bool
     {
         $row = $coord[0];
@@ -51,10 +73,10 @@ class Board
             foreach ([-1, 1] as $dirMultiplier) {
                 $dRow = $direction[0] * $dirMultiplier;
                 $dCol = $direction[1] * $dirMultiplier;
-                
+
                 $r = $row + $dRow;
                 $c = $col + $dCol;
-                
+
                 while ($r >= 0 && $r < self::FILES && $c >= 0 && $c < self::COLUMNS && $this->slots[$r][$c] == $player) {
                     $count++;
                     if ($count >= 4) {
@@ -67,15 +89,21 @@ class Board
         }
         return false;
     }
-
+    /*
+    * Metode per comprovar si el moviemnt es valid
+    * Comprova que la columna tinga espai y que existeixca
+    */
     public function isValidMove(int $column): bool
     {
         if ($column < 0 || $column >= self::COLUMNS) {
             return false;
         }
+
         return $this->slots[0][$column] == 0;
     }
-
+    /*
+    * Metode per comprovar si la taula esta plena
+    */
     public function isFull(): bool
     {
         foreach ($this->slots[0] as $slot) {

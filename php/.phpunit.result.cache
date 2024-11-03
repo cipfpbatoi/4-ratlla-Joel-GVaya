@@ -1,0 +1,1 @@
+{"version":1,"defects":{"BoardTest::testSetMovementOnFullColumn":7},"times":{"BoardTest::testInitializeBoard":0.001,"BoardTest::testSetMovementOnBoard":0,"BoardTest::testSetMovementOnFullColumn":0.002,"BoardTest::testCheckWin":0,"BoardTest::testIsValidMove":0}}

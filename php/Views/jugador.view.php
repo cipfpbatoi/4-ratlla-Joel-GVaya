@@ -1,35 +1,34 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <link rel="stylesheet" href="./css/jugadorStyles.css">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Creación de Usuario</title>
 </head>
 <body>
     <header>
-        <h1>Creacion de Usuario</h1>
+        <h1>Creación de Usuario</h1>
     </header>
-    <body>
-        <form method="POST">
+    <main>
+        <form method="POST" action="">
             <div>
-                <label for="nombre">Nombre:</label>
-                <input type="text" id="nombre" required>
+                <label for="name">Nombre:</label>
+                <input type="text" id="name" name="name" required>
             </div>
             <div>
-                <label for="color">Selecciona un color</label>
-                <select id="color">
-                    <option>Rojo</option>
-                    <option>Verde</option>
-                    <option>Morado</option>
-                    <option>Azil</option>
+                <label for="color">Selecciona un color:</label>
+                <select id="color" name="color" required>
+                    <option value="black">Negro</option>
+                    <option value="green">Verde</option>
+                    <option value="purple">Morado</option>
+                    <option value="blue">Azul</option>
                 </select>
             </div>
             <div>
-                <button type="submit">Crear usuario</button>
+                <button type="submit">Empezar partida</button>
             </div>
         </form>
-    </body>
+    </main>
 </body>
 </html>
