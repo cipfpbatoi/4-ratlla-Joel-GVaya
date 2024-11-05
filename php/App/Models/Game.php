@@ -75,6 +75,7 @@ class Game
                     // Alternar jugador si no hay ganador
                     $this->nextPlayer = $this->nextPlayer === 1 ? 2 : 1;
                 }
+                return $coord;
             }
         }
     }
@@ -93,8 +94,7 @@ class Game
                 $coord = $tempBoard->setMovementOnBoard($col, $opponent);
 
                 if ($tempBoard->checkWin($coord)) {
-                    $this->play($col);
-                    return;
+                    return $this->play($col);
                 }
             }
         }
@@ -104,8 +104,8 @@ class Game
                 $tempBoard = clone ($this->board);
                 $coord = $tempBoard->setMovementOnBoard($col, $opponent);
                 if ($tempBoard->checkWin($coord)) {
-                    $this->play($col);
-                    return;
+                    return $this->play($col);
+
                 }
             }
         }
@@ -121,7 +121,7 @@ class Game
         }
         $middle = (int) (count($possibles) / 2) + $random;
         $inthemiddle = $possibles[$middle];
-        $this->play($inthemiddle);
+        return $this->play($inthemiddle);
     }
 
     /*

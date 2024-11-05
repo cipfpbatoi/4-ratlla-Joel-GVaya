@@ -22,7 +22,10 @@ class Board
         $this->initializeBoard();
     }
 
-    //Getter per a obtindre els slots
+    /*
+    * Getter per obtindre la graella
+    * @return array
+    */
     public function getSlots(): array
     {
         return $this->slots;
@@ -43,6 +46,7 @@ class Board
     * Metode per fer un moviment en el tauler
     * Reb en quina columna es fa el moviment y el jugador que l'ha fet
     * recorre l'array des de l'ultima fila cap a munt per saber si pot fer el moviment, si pot el fa y si no retorna null
+    * @return la posició en la que s'ha fet el moviment
     */
     public function setMovementOnBoard(int $column, int $player): ?array
     {
@@ -61,6 +65,7 @@ class Board
     /*
     * Metode per comprobar si hi ha un guañador
     * reb les coordenades de l'ultim moviment fet y des d'ahi comprova si hi han 4 juntes
+    * @return boolean. Si hi ha guañador o no
     */
     public function checkWin(array $coord): bool
     {
@@ -92,6 +97,7 @@ class Board
     /*
     * Metode per comprovar si el moviemnt es valid
     * Comprova que la columna tinga espai y que existeixca
+    * @return boolean. Si es pot realitzar el moviment o no
     */
     public function isValidMove(int $column): bool
     {
@@ -103,6 +109,7 @@ class Board
     }
     /*
     * Metode per comprovar si la taula esta plena
+    * @return boolean. Si la taula esta plena o no
     */
     public function isFull(): bool
     {
